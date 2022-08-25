@@ -1,37 +1,18 @@
-require("dotenv").config();
+require("dotenv").config(); //Habilitamos el dotenv
 
+//Lo requirimientos basicos.
 const express = require("express")
 const cors = require("cors")
 const mongoose = require("mongoose");
 const app = express();
 
-
+//Que usa la App
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({extended:true}));
 
 
-
-const cats = [
-    {
-        title: "Kitty 1",
-        description: "This is kitty 1",
-        url: "https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-f3860ceb0ef19643c335cb34df3fa1de166e2761-s1100-c50.jpg"
-    },
-    {
-        title: "Kitty 2",
-        description: "This is kitty 2",
-        url: "https://d3544la1u8djza.cloudfront.net/APHI/Blog/2020/07-23/How+Much+Does+It+Cost+to+Have+a+Cat+_+ASPCA+Pet+Insurance+_+black+cat+with+yellow+eyes+peeking+out-min.jpg"
-    },
-    {
-        title: "Kitty 3",
-        description: "This is kitty 3",
-        url: "https://media.newyorker.com/photos/5dfab39dde5fcf00086aec77/1:1/w_1706,h_1706,c_limit/Lane-Cats.jpg"
-    },
-]
-
-
-
+//Conectando a la base de datos de Mongoose.
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology:true,
@@ -46,27 +27,40 @@ mongoose.connect(process.env.MONGO_URI, {
    }
 );
 
+//Para anadir mas forms
+const forms = [
+    {
+        title: "Chargers",
+        description: "There are 40 chargers",
+        url: "https://i.ebayimg.com/images/g/n7EAAOxyHE5RthyP/s-l500.jpg"
+    }
+]
 
+//Esquema basico de mi Collection
 const schema = new mongoose.Schema({
     title: String,
     description: String,
     url: String
 })
 
+//El model de mi Collection.
 const Kitty = mongoose.model("Kitty", schema)
 
 
-// cats.forEach(cat => {
-//     const newCat = new Kitty({
-//         title: cat.title,
-//         description: cat.description,
-//         url: cat.url
-//     })
+//Guardando cada form anadidos arriba
 
-//     newCat.save()
-// });
+//  forms.forEach(form => {
+//      const newForm = new Kitty({
+//          title: form.title,
+//          description: form.description,
+//          url: form.url
+//      })
+
+//      newForm.save()
+//  });
 
 
+//Que muestra nuestra aplicacion backend. Y luego busca en nuestra Collection todos los items  y los muestra en formato JSON.
 app.get("/", (req,res) => {
     Kitty.find({}).then(
         items => res.json(items)
