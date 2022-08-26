@@ -1,0 +1,23 @@
+.Inventory h4{
+    text-align: center;
+    color: white;
+    font-size: 50px;
+  }
+  
+  .Block div{
+    text-align: center;
+    margin: 0 auto;
+    color: white;
+  }
+
+
+  .Block img{
+    cursor: pointer;
+  }
+  
+  .Block{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    
+  }
+  

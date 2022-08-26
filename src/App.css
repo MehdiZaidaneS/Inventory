@@ -1,14 +1,9 @@
+html, body{
+  background-color: rgb(64, 23, 160);
+}
+
 .App{
-  text-align: center;
+  background-color: rgb(64, 23, 160);
 }
 
-.Block img{
-  cursor: pointer;
-}
 
-.Block{
-  display: flex;
-  flex-direction: column; 
-  width: 20%; 
-  margin: auto auto;
-}
